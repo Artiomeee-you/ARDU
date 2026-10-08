@@ -1,0 +1,2700 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Робототехника — учебный справочник</title>
+<style>
+:root{
+  --blue:#2563eb;
+  --blue2:#eff6ff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --bg:#f3f4f6;
+  --card:#fff;
+  --code:#111827;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+button{font:inherit}
+.app{
+  display:grid;
+  grid-template-columns:270px 1fr;
+  min-height:100vh;
+  transition:grid-template-columns .2s ease;
+}
+.app.menu-collapsed{
+  grid-template-columns:0 1fr;
+}
+.sidebar{
+  background:#fff;
+  border-right:1px solid var(--line);
+  padding:18px 14px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:auto;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.app.menu-collapsed .sidebar{
+  transform:translateX(-100%);
+  opacity:0;
+  pointer-events:none;
+}
+.logo{
+  font-size:21px;
+  font-weight:700;
+  color:#1e40af;
+  margin:6px 8px 24px;
+}
+.menu-title{
+  color:#9ca3af;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:18px 10px 7px;
+}
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:9px;
+  cursor:pointer;
+  color:#374151;
+  margin:2px 0;
+}
+.nav-btn:hover{background:#f3f4f6}
+.nav-btn.active{
+  background:#eaf2ff;
+  color:#1d4ed8;
+  font-weight:700;
+}
+.sidebar-note{
+  margin-top:22px;
+  padding:12px;
+  font-size:13px;
+  background:#f9fafb;
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:var(--muted);
+}
+.content{
+  padding:24px 32px 60px;
+  max-width:1250px;
+  width:100%;
+}
+.topbar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+.menu-toggle{
+  border:1px solid #cbd5e1;
+  background:#fff;
+  color:#1f2937;
+  border-radius:8px;
+  padding:9px 12px;
+  cursor:pointer;
+  font-weight:700;
+}
+.menu-toggle:hover{background:#f8fafc}
+.breadcrumb{
+  color:var(--muted);
+  font-size:14px;
+}
+.page{display:none}
+.page.active{display:block}
+.page h1{
+  margin:0 0 8px;
+  font-size:32px;
+}
+.lead{
+  color:var(--muted);
+  max-width:850px;
+  margin:0 0 22px;
+}
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:18px;
+}
+.photo-placeholder{
+  min-height:190px;
+  border:2px dashed #cbd5e1;
+  background:#f8fafc;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#64748b;
+  padding:20px;
+  font-weight:700;
+}
+.photo-small{min-height:130px}
+.scheme-placeholder{
+  min-height:230px;
+  border:2px dashed #93c5fd;
+  background:#eff6ff;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#1d4ed8;
+  padding:20px;
+  font-weight:700;
+  margin-top:14px;
+}
+.home-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.quick-card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
+  cursor:pointer;
+}
+.quick-card:hover{
+  border-color:#93c5fd;
+  box-shadow:0 3px 12px rgba(37,99,235,.08);
+}
+.quick-card h3{margin:0 0 5px;color:#1d4ed8}
+.quick-card p{margin:0;color:var(--muted)}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.step{
+  padding:16px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+.step b{color:#1d4ed8}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:17px;
+}
+.card h3{margin:0 0 8px}
+.card p{color:var(--muted)}
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  background:#eef2ff;
+  color:#4338ca;
+  margin-bottom:8px;
+}
+.btn{
+  display:inline-block;
+  border:0;
+  background:var(--blue);
+  color:white;
+  border-radius:8px;
+  padding:9px 12px;
+  cursor:pointer;
+  font-weight:700;
+  text-decoration:none;
+}
+.sensor-layout{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:18px;
+}
+.sensor-list{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+  height:max-content;
+  position:sticky;
+  top:20px;
+}
+.sensor-item{
+  width:100%;
+  text-align:left;
+  border:0;
+  background:transparent;
+  border-radius:8px;
+  padding:11px 10px;
+  cursor:pointer;
+  margin:3px 0;
+  color:#1f2937;
+  display:block;
+}
+.sensor-item .sensor-name{
+  display:block;
+  font-weight:700;
+  color:#1f2937;
+}
+.sensor-item .sensor-desc{
+  display:block;
+  margin-top:3px;
+  color:#6b7280;
+  font-size:12px;
+  font-weight:400;
+  line-height:1.35;
+}
+.sensor-item.active .sensor-name{color:#1d4ed8}
+.sensor-detail,
+.sensor-detail p,
+.sensor-detail h2,
+.sensor-detail h3{
+  color:#1f2937;
+}
+.sensor-detail p{line-height:1.6}
+.sensor-item:hover{background:#f3f4f6}
+.sensor-item.active{
+  background:#eaf2ff;
+  color:#1d4ed8;
+  font-weight:700;
+}
+.sensor-detail{display:none}
+.sensor-detail.active{display:block}
+.sensor-head{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:20px;
+  align-items:start;
+}
+.connection-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+.connection-table th,.connection-table td{
+  border:1px solid var(--line);
+  padding:10px;
+  text-align:left;
+}
+.connection-table th{background:#f8fafc}
+.code-wrap{
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:14px;
+  border:1px solid #1f2937;
+}
+.code-title{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:9px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+}
+.copy{
+  border:1px solid #4b5563;
+  background:#111827;
+  color:#e5e7eb;
+  border-radius:7px;
+  padding:5px 8px;
+  cursor:pointer;
+}
+pre{
+  margin:0;
+  padding:16px;
+  overflow:auto;
+  background:var(--code);
+  color:#e5e7eb;
+  font:14px/1.55 Consolas,monospace;
+}
+.explain{
+  margin-top:14px;
+  display:grid;
+  gap:9px;
+}
+.explain-row{
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:12px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#fff;
+}
+.explain-row code{
+  background:#f3f4f6;
+  padding:3px 6px;
+  border-radius:5px;
+  color:#b91c1c;
+}
+.tip{
+  border-left:4px solid var(--blue);
+  background:#eff6ff;
+  padding:12px 14px;
+  border-radius:8px;
+  margin:14px 0;
+}
+.tip.warn{
+  border-color:#eab308;
+  background:#fefce8;
+}
+.mini-project{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:14px;
+}
+.mini-project h3{margin:0 0 5px}
+.project-meta{color:var(--muted);font-size:14px}
+.download-card{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:18px;
+  align-items:start;
+}
+.task-list{
+  display:grid;
+  gap:14px;
+}
+.lesson-list{
+  display:grid;
+  gap:16px;
+}
+.lesson-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+}
+.lesson-goal{
+  background:#eff6ff;
+  border-left:4px solid #2563eb;
+  padding:12px 14px;
+  border-radius:8px;
+  margin:14px 0;
+}
+.lesson-step{
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  margin-top:14px;
+}
+.lesson-step h4{
+  margin:0 0 8px;
+  color:#1d4ed8;
+}
+.lesson-result{
+  background:#f0fdf4;
+  border-left:4px solid #16a34a;
+  padding:12px 14px;
+  border-radius:8px;
+  margin-top:14px;
+}
+.lesson-head{
+  padding:18px 20px;
+  background:#f8fafc;
+  border-bottom:1px solid var(--line);
+}
+.lesson-number{
+  color:#1d4ed8;
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+.lesson-head h2{
+  margin:4px 0 6px;
+  font-size:22px;
+}
+.lesson-head p{
+  margin:0;
+  color:#6b7280;
+}
+.lesson-body{
+  padding:18px 20px;
+}
+.lesson-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.lesson-box{
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:13px;
+}
+.lesson-box h4{
+  margin:0 0 7px;
+  color:#1d4ed8;
+}
+@media(max-width:900px){
+  .lesson-cols{grid-template-columns:1fr}
+}
+.task{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
+}
+.task h3{margin-top:0}
+.task-level{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:10px;
+}
+footer{
+  color:#9ca3af;
+  font-size:13px;
+  margin-top:28px;
+}
+.mobile-toggle{display:none}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{
+    position:fixed;
+    left:-290px;
+    z-index:50;
+    width:270px;
+    transition:.2s;
+    box-shadow:0 0 25px rgba(0,0,0,.15);
+    opacity:1;
+    transform:none;
+    pointer-events:auto;
+  }
+  .app.menu-collapsed .sidebar{
+    transform:none;
+    opacity:1;
+    pointer-events:auto;
+  }
+  .sidebar.open{left:0}
+  .mobile-toggle{
+    display:inline-block;
+    border:0;
+    background:#2563eb;
+    color:#fff;
+    border-radius:8px;
+    padding:9px 11px;
+    margin-right:12px;
+  }
+  .content{padding:18px}
+  .sensor-layout{grid-template-columns:1fr}
+  .sensor-list{position:static}
+  .sensor-head,.download-card{grid-template-columns:1fr}
+  .home-grid,.cards,.steps{grid-template-columns:1fr}
+  .explain-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="sidebar" id="sidebar">
+  <div class="logo">Робототехника</div>
+
+  <div class="menu-title">Основное меню</div>
+  <button class="nav-btn active" data-page="home">Главная</button>
+  <button class="nav-btn" data-page="software">ПО и скачивание</button>
+  <button class="nav-btn" data-page="controllers">Виды микроконтроллеров</button>
+  <button class="nav-btn" data-page="sensors">Компоненты и подключение</button>
+  <button class="nav-btn" data-page="algorithms">Алгоритмические конструкции</button>
+  <button class="nav-btn" data-page="lessons">Уроки</button>
+  <button class="nav-btn" data-page="projects">Мини-проекты</button>
+  <button class="nav-btn" data-page="tasks">Задания</button>
+
+  <div class="sidebar-note">
+    Все фотографии и схемы можно добавить позже. Для них оставлены отдельные места.
+  </div>
+</aside>
+
+<main class="content">
+  <div class="topbar">
+    <button class="menu-toggle" id="menuToggle">Скрыть меню</button>
+    <div class="breadcrumb" id="breadcrumb">Главная</div>
+  </div>
+
+  <section class="page active" id="page-home">
+    <h1>Главная</h1>
+    <p class="lead">
+      Учебный справочник по робототехнике. Каждый раздел открывается отдельно через меню слева.
+    </p>
+
+    <div class="panel">
+      <div class="photo-placeholder">
+        МЕСТО ДЛЯ ГЛАВНОГО ФОТО<br>
+        Например: Arduino, набор для робототехники или учебный робот
+      </div>
+    </div>
+
+    <div class="home-grid">
+      <div class="quick-card" data-page="software">
+        <h3>ПО и скачивание</h3>
+        <p>Arduino IDE, драйверы, выбор платы и COM-порта.</p>
+      </div>
+      <div class="quick-card" data-page="controllers">
+        <h3>Виды микроконтроллеров</h3>
+        <p>Arduino Uno, Nano, Mega и ESP32.</p>
+      </div>
+      <div class="quick-card" data-page="sensors">
+        <h3>Компоненты и подключение</h3>
+        <p>Назначение, контакты, схема подключения и код.</p>
+      </div>
+      <div class="quick-card" data-page="algorithms">
+        <h3>Алгоритмические конструкции</h3>
+        <p>Следование, ветвление и циклы на простых примерах.</p>
+      </div>
+      <div class="quick-card" data-page="lessons">
+        <h3>Уроки</h3>
+        <p>10 последовательных занятий от первого подключения до робота.</p>
+      </div>
+      <div class="quick-card" data-page="projects">
+        <h3>Мини-проекты</h3>
+        <p>Простые учебные проекты с несколькими компонентами.</p>
+      </div>
+      <div class="quick-card" data-page="tasks">
+        <h3>Задания</h3>
+        <p>Задания для самостоятельного выполнения без готового решения.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <h2>Как работает робот</h2>
+      <div class="steps">
+        <div class="step"><b>1. Датчик</b><br>Получает информацию из окружающей среды.</div>
+        <div class="step"><b>2. Микроконтроллер</b><br>Читает данные и выполняет программу.</div>
+        <div class="step"><b>3. Исполнительное устройство</b><br>Включает свет, звук, мотор или сервопривод.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-software">
+    <h1>ПО и скачивание</h1>
+    <p class="lead">Что нужно установить перед первым занятием.</p>
+
+    <div class="panel download-card">
+      <div class="photo-placeholder photo-small">ФОТО ARDUINO IDE</div>
+      <div>
+        <h2>Arduino IDE</h2>
+        <p>Программа для написания и загрузки скетчей в Arduino.</p>
+        <a class="btn" href="https://www.arduino.cc/en/software" target="_blank">Открыть сайт Arduino</a>
+      </div>
+    </div>
+
+    <div class="panel download-card">
+      <div class="photo-placeholder photo-small">ФОТО WOKWI</div>
+      <div>
+        <h2>Сайт для симуляции схем</h2>
+        <p>
+          Wokwi позволяет собрать виртуальную схему с Arduino прямо в браузере,
+          написать программу и проверить её работу без реальной платы.
+        </p>
+        <a class="btn" href="https://wokwi.com/projects/new/arduino-uno" target="_blank">Открыть Wokwi</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Как загрузить программу</h2>
+      <ol>
+        <li>Подключите Arduino к компьютеру через USB.</li>
+        <li>Откройте Arduino IDE.</li>
+        <li>Выберите модель платы.</li>
+        <li>Выберите COM-порт.</li>
+        <li>Откройте или напишите программу.</li>
+        <li>Нажмите Upload.</li>
+      </ol>
+      <div class="photo-placeholder">ФОТО: ВЫБОР ПЛАТЫ И COM-ПОРТА</div>
+    </div>
+
+    <div class="panel">
+      <h2>Драйвер CH340</h2>
+      <p>Некоторые совместимые платы Arduino используют USB-чип CH340. Если плата не определяется, может понадобиться отдельный драйвер.</p>
+      <div class="photo-placeholder photo-small">ФОТО ПЛАТЫ С CH340</div>
+    </div>
+  </section>
+
+  <section class="page" id="page-controllers">
+    <h1>Виды микроконтроллеров</h1>
+    <p class="lead">
+      Плату выбирают не по принципу «какая лучше вообще», а по задаче:
+      размер устройства, количество подключений, необходимость Wi-Fi и сложность проекта.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="badge">Лучший вариант для начала</span>
+        <h3>Arduino Uno</h3>
+        <div class="photo-placeholder photo-small">ФОТО ARDUINO UNO</div>
+        <p>
+          Удобная учебная плата: крупная, понятная маркировка контактов и огромное количество
+          учебных примеров.
+        </p>
+
+        <h4>Когда выбирать</h4>
+        <ul>
+          <li>первые уроки робототехники;</li>
+          <li>работа на макетной плате;</li>
+          <li>простые датчики, светодиоды, сервоприводы;</li>
+          <li>когда размер устройства не важен.</li>
+        </ul>
+
+        <div class="tip">
+          <b>Почему:</b> ученику проще видеть подписи пинов и подключать провода.
+          Поэтому Uno удобно использовать как основную учебную плату.
+        </div>
+
+        <table class="connection-table">
+          <tr><th>Параметр</th><th>Arduino Uno</th></tr>
+          <tr><td>Логическое напряжение</td><td>5 В</td></tr>
+          <tr><td>Цифровые пины</td><td>14</td></tr>
+          <tr><td>Аналоговые входы</td><td>6</td></tr>
+          <tr><td>Wi-Fi / Bluetooth</td><td>Нет</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <span class="badge">Когда устройство должно быть маленьким</span>
+        <h3>Arduino Nano</h3>
+        <div class="photo-placeholder photo-small">ФОТО ARDUINO NANO</div>
+        <p>
+          Компактная плата. Классическая Arduino Nano по возможностям близка к Uno,
+          но занимает значительно меньше места.
+        </p>
+
+        <h4>Когда выбирать</h4>
+        <ul>
+          <li>небольшой робот или готовое устройство;</li>
+          <li>плату нужно установить прямо на макетную плату;</li>
+          <li>проект уже проверен на Uno и его нужно уменьшить;</li>
+          <li>не хочется занимать много места внутри корпуса.</li>
+        </ul>
+
+        <div class="tip">
+          <b>Почему:</b> для учебного прототипа удобно начать с Uno, а затем перенести
+          готовую схему на Nano и получить более компактное устройство.
+        </div>
+
+        <table class="connection-table">
+          <tr><th>Параметр</th><th>Классическая Nano</th></tr>
+          <tr><td>Логическое напряжение</td><td>5 В</td></tr>
+          <tr><td>Главное преимущество</td><td>Компактность</td></tr>
+          <tr><td>Подходит для макетной платы</td><td>Да</td></tr>
+          <tr><td>Wi-Fi / Bluetooth</td><td>Нет</td></tr>
+        </table>
+
+        <div class="tip warn">
+          У Arduino Nano есть разные современные версии. Их характеристики могут отличаться
+          от классической Nano.
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="badge">Для большого количества устройств</span>
+        <h3>Arduino Mega 2560</h3>
+        <div class="photo-placeholder photo-small">ФОТО ARDUINO MEGA</div>
+        <p>
+          Большая плата с намного большим количеством входов и выходов, чем Uno.
+        </p>
+
+        <h4>Когда выбирать</h4>
+        <ul>
+          <li>нужно подключить много датчиков одновременно;</li>
+          <li>в проекте много кнопок, светодиодов, реле или сервоприводов;</li>
+          <li>нужно несколько аппаратных последовательных портов;</li>
+          <li>на Arduino Uno уже не хватает пинов.</li>
+        </ul>
+
+        <div class="tip">
+          <b>Почему:</b> Mega нужна не потому, что проект «сложный», а прежде всего тогда,
+          когда физически не хватает входов и выходов.
+        </div>
+
+        <table class="connection-table">
+          <tr><th>Параметр</th><th>Arduino Mega 2560</th></tr>
+          <tr><td>Логическое напряжение</td><td>5 В</td></tr>
+          <tr><td>Цифровые пины</td><td>54</td></tr>
+          <tr><td>Аналоговые входы</td><td>16</td></tr>
+          <tr><td>Аппаратные Serial-порты</td><td>4</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <span class="badge">Для беспроводных и более сложных проектов</span>
+        <h3>ESP32</h3>
+        <div class="photo-placeholder photo-small">ФОТО ESP32</div>
+        <p>
+          Семейство более мощных микроконтроллеров со встроенной беспроводной связью.
+          Часто используется в устройствах, которые должны обмениваться данными по сети.
+        </p>
+
+        <h4>Когда выбирать</h4>
+        <ul>
+          <li>нужен Wi-Fi;</li>
+          <li>нужен Bluetooth;</li>
+          <li>данные должны передаваться на телефон или веб-страницу;</li>
+          <li>Arduino Uno уже недостаточно по возможностям;</li>
+          <li>создаётся устройство для интернета вещей.</li>
+        </ul>
+
+        <div class="tip">
+          <b>Почему:</b> ESP32 позволяет сделать, например, беспроводной датчик,
+          веб-панель управления роботом или устройство, отправляющее показания по Wi-Fi.
+        </div>
+
+        <table class="connection-table">
+          <tr><th>Параметр</th><th>ESP32</th></tr>
+          <tr><td>Логическое напряжение</td><td>3,3 В</td></tr>
+          <tr><td>Wi-Fi</td><td>Есть</td></tr>
+          <tr><td>Bluetooth</td><td>Есть у многих вариантов ESP32</td></tr>
+          <tr><td>Количество пинов</td><td>Зависит от конкретной платы</td></tr>
+        </table>
+
+        <div class="tip warn">
+          <b>Важно:</b> GPIO ESP32 работают с логикой 3,3 В и обычно не являются
+          5-вольт-толерантными. Перед подключением 5-вольтовых сигналов нужно проверять совместимость.
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <h2>Быстрый выбор платы</h2>
+      <table class="connection-table">
+        <tr><th>Задача</th><th>Удобный выбор</th><th>Причина</th></tr>
+        <tr><td>Первый урок</td><td>Arduino Uno</td><td>Простота и наглядность</td></tr>
+        <tr><td>Компактное готовое устройство</td><td>Arduino Nano</td><td>Маленький размер</td></tr>
+        <tr><td>Очень много подключений</td><td>Arduino Mega</td><td>Большое количество пинов</td></tr>
+        <tr><td>Wi-Fi или Bluetooth</td><td>ESP32</td><td>Беспроводная связь встроена в микроконтроллер</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="page" id="page-sensors">
+    <h1>Компоненты и подключение</h1>
+    <p class="lead">
+      Выберите нужный компонент. Для каждого указано назначение, контакты, схема подключения, готовый пример программы и объяснение кода.
+    </p>
+
+    <div class="sensor-layout">
+      <div class="sensor-list">
+        <div class="menu-title" style="margin-top:6px">Датчики и устройства ввода</div>
+
+        <button class="sensor-item active" data-sensor="button">
+          <span class="sensor-name">Кнопка</span>
+          <span class="sensor-desc">Нажата или не нажата</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="pot">
+          <span class="sensor-name">Потенциометр</span>
+          <span class="sensor-desc">Плавная регулировка значения</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="ldr">
+          <span class="sensor-name">Фоторезистор</span>
+          <span class="sensor-desc">Измерение освещённости</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="hcsr04">
+          <span class="sensor-name">HC-SR04</span>
+          <span class="sensor-desc">Измерение расстояния</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="pir">
+          <span class="sensor-name">PIR</span>
+          <span class="sensor-desc">Обнаружение движения</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="dht11">
+          <span class="sensor-name">DHT11</span>
+          <span class="sensor-desc">Температура и влажность</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="line">
+          <span class="sensor-name">Датчик линии</span>
+          <span class="sensor-desc">Чёрная или светлая поверхность</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="joystick">
+          <span class="sensor-name">Джойстик</span>
+          <span class="sensor-desc">Две оси и кнопка</span>
+        </button>
+
+        <div class="menu-title">Исполнительные устройства</div>
+
+        <button class="sensor-item" data-sensor="led">
+          <span class="sensor-name">Светодиод</span>
+          <span class="sensor-desc">Световая индикация</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="rgb">
+          <span class="sensor-name">RGB-светодиод</span>
+          <span class="sensor-desc">Управление цветом</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="buzzer">
+          <span class="sensor-name">Зуммер</span>
+          <span class="sensor-desc">Звуковой сигнал</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="servo">
+          <span class="sensor-name">Servo SG90</span>
+          <span class="sensor-desc">Поворот на заданный угол</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="relay">
+          <span class="sensor-name">Реле</span>
+          <span class="sensor-desc">Включение внешней нагрузки</span>
+        </button>
+
+        <button class="sensor-item" data-sensor="motor">
+          <span class="sensor-name">DC-мотор и драйвер</span>
+          <span class="sensor-desc">Движение и регулировка скорости</span>
+        </button>
+      </div>
+
+      <div>
+        <div class="sensor-detail" id="sensor-hcsr04">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО HC-SR04</div>
+              <div>
+                <span class="badge">Датчик расстояния</span>
+                <h2>HC-SR04</h2>
+                <p>Измеряет расстояние до объекта с помощью ультразвука.</p>
+              </div>
+            </div>
+
+            <h3>Подключение</h3>
+            <table class="connection-table">
+              <tr><th>HC-SR04</th><th>Arduino Uno</th><th>Назначение</th></tr>
+              <tr><td>VCC</td><td>5V</td><td>Питание</td></tr>
+              <tr><td>GND</td><td>GND</td><td>Общий провод</td></tr>
+              <tr><td>TRIG</td><td>D7</td><td>Отправка импульса</td></tr>
+              <tr><td>ECHO</td><td>D6</td><td>Приём ответа</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ HC-SR04</div>
+
+            <h3>Мини-программа</h3>
+            <div class="code-wrap">
+              <div class="code-title"><span>Измерение расстояния</span><button class="copy">Копировать</button></div>
+<pre><code>// Пины датчика расстояния
+const int TRIG = 7;
+const int ECHO = 6;
+
+void setup() {
+  // TRIG отправляет импульс
+  pinMode(TRIG, OUTPUT);
+
+  // ECHO принимает отражённый сигнал
+  pinMode(ECHO, INPUT);
+
+  // Запускаем Serial Monitor
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Подготавливаем TRIG к новому импульсу
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+
+  // Отправляем импульс длительностью 10 микросекунд
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+
+  // Измеряем длительность сигнала ECHO
+  long time = pulseIn(ECHO, HIGH);
+
+  // Переводим время в расстояние в сантиметрах
+  float distance = time * 0.034 / 2;
+
+  // Показываем расстояние в Serial Monitor
+  Serial.println(distance);
+
+  delay(200);
+}</code></pre>
+            </div>
+
+            <h3>Что означает код</h3>
+            <div class="explain">
+              <div class="explain-row"><code>const int TRIG = 7;</code><div>Запоминаем, что контакт TRIG подключён к D7.</div></div>
+              <div class="explain-row"><code>pinMode(TRIG, OUTPUT);</code><div>D7 будет отправлять сигнал датчику.</div></div>
+              <div class="explain-row"><code>pinMode(ECHO, INPUT);</code><div>D6 будет принимать сигнал от датчика.</div></div>
+              <div class="explain-row"><code>pulseIn(ECHO, HIGH)</code><div>Измеряем длительность возвращённого импульса.</div></div>
+              <div class="explain-row"><code>time * 0.034 / 2</code><div>Переводим время в расстояние в сантиметрах.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-pir">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО PIR ДАТЧИКА</div>
+              <div>
+                <span class="badge">Датчик движения</span>
+                <h2>PIR</h2>
+                <p>Определяет движение человека или другого тёплого объекта.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>PIR</th><th>Arduino Uno</th></tr>
+              <tr><td>VCC</td><td>5V</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+              <tr><td>OUT</td><td>D2</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ PIR</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Определение движения</span><button class="copy">Копировать</button></div>
+<pre><code>// PIR подключён к цифровому пину D2
+const int PIR = 2;
+
+void setup() {
+  // Пин работает как вход
+  pinMode(PIR, INPUT);
+
+  // Включаем Serial Monitor
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Читаем состояние датчика
+  int state = digitalRead(PIR);
+
+  // Если датчик обнаружил движение
+  if (state == HIGH) {
+    Serial.println("Есть движение");
+  } else {
+    Serial.println("Движения нет");
+  }
+
+  delay(200);
+}</code></pre>
+            </div>
+
+            <div class="explain">
+              <div class="explain-row"><code>digitalRead(PIR)</code><div>Читаем состояние датчика.</div></div>
+              <div class="explain-row"><code>if (state == HIGH)</code><div>Если движение обнаружено, выполняются команды внутри условия.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-ldr">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО ФОТОРЕЗИСТОРА</div>
+              <div>
+                <span class="badge">Освещённость</span>
+                <h2>Фоторезистор</h2>
+                <p>Позволяет определить уровень освещённости.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Элемент</th><th>Подключение</th></tr>
+              <tr><td>Фоторезистор</td><td>между 5V и A0</td></tr>
+              <tr><td>Резистор 10 кОм</td><td>между A0 и GND</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ФОТОРЕЗИСТОРА</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Чтение освещённости</span><button class="copy">Копировать</button></div>
+<pre><code>void setup() {
+  // Включаем Serial Monitor
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Читаем уровень освещённости с A0
+  int light = analogRead(A0);
+
+  // Выводим полученное значение
+  Serial.println(light);
+
+  delay(200);
+}</code></pre>
+            </div>
+
+            <div class="explain">
+              <div class="explain-row"><code>analogRead(A0)</code><div>Получаем значение примерно от 0 до 1023.</div></div>
+              <div class="explain-row"><code>int light</code><div>Создаём переменную для хранения результата.</div></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="sensor-detail" id="sensor-pot">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО ПОТЕНЦИОМЕТРА</div>
+              <div>
+                <span class="badge">Аналоговый ввод</span>
+                <h2>Потенциометр</h2>
+                <p>Переменный резистор. При повороте ручки Arduino получает изменяющееся аналоговое значение.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Вывод потенциометра</th><th>Arduino</th></tr>
+              <tr><td>Крайний вывод</td><td>5V</td></tr>
+              <tr><td>Средний вывод</td><td>A0</td></tr>
+              <tr><td>Второй крайний вывод</td><td>GND</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ПОТЕНЦИОМЕТРА</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Чтение положения ручки</span><button class="copy">Копировать</button></div>
+<pre><code>void setup() {
+  // Включаем обмен данными с компьютером
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Читаем значение с аналогового входа A0
+  int value = analogRead(A0);
+
+  // Выводим значение от 0 до 1023 в Serial Monitor
+  Serial.println(value);
+
+  // Небольшая пауза для удобного просмотра
+  delay(100);
+}</code></pre>
+            </div>
+
+            <div class="explain">
+              <div class="explain-row"><code>analogRead(A0)</code><div>Читает положение потенциометра. Arduino Uno получает значение примерно от 0 до 1023.</div></div>
+              <div class="explain-row"><code>Serial.println(value)</code><div>Показывает текущее значение в Serial Monitor.</div></div>
+            </div>
+
+            <div class="tip">
+              Потенциометр удобно использовать для регулировки яркости светодиода, скорости мотора или положения сервопривода.
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail active" id="sensor-button">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО КНОПКИ</div>
+              <div>
+                <span class="badge">Цифровой вход</span>
+                <h2>Кнопка</h2>
+                <p>Простейшее устройство ввода.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Кнопка</th><th>Arduino</th></tr>
+              <tr><td>Контакт 1</td><td>D2</td></tr>
+              <tr><td>Контакт 2</td><td>GND</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ КНОПКИ</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Проверка кнопки</span><button class="copy">Копировать</button></div>
+<pre><code>// Кнопка подключена к D2
+const int BUTTON = 2;
+
+void setup() {
+  // Включаем внутренний подтягивающий резистор
+  pinMode(BUTTON, INPUT_PULLUP);
+
+  // Включаем Serial Monitor
+  Serial.begin(9600);
+}
+
+void loop() {
+  // При INPUT_PULLUP нажатая кнопка даёт LOW
+  if (digitalRead(BUTTON) == LOW) {
+    Serial.println("Кнопка нажата");
+  }
+
+  delay(100);
+}</code></pre>
+            </div>
+
+            <div class="tip warn"><b>Важно:</b> при INPUT_PULLUP нажатая кнопка даёт LOW.</div>
+
+            <div class="explain">
+              <div class="explain-row"><code>INPUT_PULLUP</code><div>Включаем внутренний подтягивающий резистор Arduino.</div></div>
+              <div class="explain-row"><code>digitalRead(BUTTON)</code><div>Проверяем состояние кнопки.</div></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="sensor-detail" id="sensor-led">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО СВЕТОДИОДА</div>
+              <div>
+                <span class="badge">Исполнительное устройство</span>
+                <h2>Светодиод</h2>
+                <p>Простейший источник света. Используется для индикации состояния устройства.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Светодиод</th><th>Arduino</th></tr>
+              <tr><td>Длинная ножка (анод)</td><td>D8 через резистор 220–330 Ом</td></tr>
+              <tr><td>Короткая ножка (катод)</td><td>GND</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ СВЕТОДИОДА</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Мигание светодиода</span><button class="copy">Копировать</button></div>
+<pre><code>// Светодиод подключён к D8
+const int LED = 8;
+
+void setup() {
+  // Настраиваем пин как выход
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  // Включаем светодиод
+  digitalWrite(LED, HIGH);
+  delay(1000);
+
+  // Выключаем светодиод
+  digitalWrite(LED, LOW);
+  delay(1000);
+}</code></pre>
+            </div>
+
+            <div class="explain">
+              <div class="explain-row"><code>pinMode(LED, OUTPUT)</code><div>Настраивает пин для управления устройством.</div></div>
+              <div class="explain-row"><code>digitalWrite(LED, HIGH)</code><div>Подаёт высокий логический уровень и включает светодиод.</div></div>
+              <div class="explain-row"><code>digitalWrite(LED, LOW)</code><div>Выключает светодиод.</div></div>
+            </div>
+
+            <div class="tip warn"><b>Важно:</b> светодиод подключают через ограничительный резистор.</div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-rgb">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО RGB-СВЕТОДИОДА</div>
+              <div>
+                <span class="badge">Цветовая индикация</span>
+                <h2>RGB-светодиод</h2>
+                <p>Содержит три светодиода: красный, зелёный и синий. Их можно смешивать и получать разные цвета.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Вывод</th><th>Arduino</th></tr>
+              <tr><td>R</td><td>D9 через резистор</td></tr>
+              <tr><td>G</td><td>D10 через резистор</td></tr>
+              <tr><td>B</td><td>D11 через резистор</td></tr>
+              <tr><td>Общий вывод</td><td>GND для RGB с общим катодом</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ RGB-СВЕТОДИОДА</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Изменение цвета</span><button class="copy">Копировать</button></div>
+<pre><code>const int RED = 9;
+const int GREEN = 10;
+const int BLUE = 11;
+
+void setup() {
+  // Все три канала работают как выходы
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+}
+
+void loop() {
+  // Красный цвет
+  analogWrite(RED, 255);
+  analogWrite(GREEN, 0);
+  analogWrite(BLUE, 0);
+  delay(1000);
+
+  // Зелёный цвет
+  analogWrite(RED, 0);
+  analogWrite(GREEN, 255);
+  analogWrite(BLUE, 0);
+  delay(1000);
+
+  // Синий цвет
+  analogWrite(RED, 0);
+  analogWrite(GREEN, 0);
+  analogWrite(BLUE, 255);
+  delay(1000);
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-dht11">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО DHT11</div>
+              <div>
+                <span class="badge">Температура и влажность</span>
+                <h2>DHT11</h2>
+                <p>Измеряет температуру воздуха и относительную влажность.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>DHT11</th><th>Arduino Uno</th></tr>
+              <tr><td>VCC</td><td>5V</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+              <tr><td>DATA</td><td>D2</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ DHT11</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Температура и влажность</span><button class="copy">Копировать</button></div>
+<pre><code>// Для этого примера нужна библиотека DHT
+#include &lt;DHT.h&gt;
+
+// Датчик подключён к D2
+#define DHTPIN 2
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  // Запускаем Serial Monitor
+  Serial.begin(9600);
+
+  // Запускаем датчик
+  dht.begin();
+}
+
+void loop() {
+  // Читаем влажность
+  float humidity = dht.readHumidity();
+
+  // Читаем температуру
+  float temperature = dht.readTemperature();
+
+  Serial.print("Температура: ");
+  Serial.println(temperature);
+
+  Serial.print("Влажность: ");
+  Serial.println(humidity);
+
+  delay(2000);
+}</code></pre>
+            </div>
+
+            <div class="tip">Для DHT11 потребуется установить библиотеку DHT через Library Manager в Arduino IDE.</div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-line">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО ДАТЧИКА ЛИНИИ</div>
+              <div>
+                <span class="badge">Оптический датчик</span>
+                <h2>Датчик линии</h2>
+                <p>Используется в роботах, которые движутся по чёрной или белой линии.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Датчик</th><th>Arduino</th></tr>
+              <tr><td>VCC</td><td>5V</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+              <tr><td>OUT</td><td>D2</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ДАТЧИКА ЛИНИИ</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Чтение датчика линии</span><button class="copy">Копировать</button></div>
+<pre><code>const int LINE = 2;
+
+void setup() {
+  // Пин датчика работает как вход
+  pinMode(LINE, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Читаем состояние датчика
+  int state = digitalRead(LINE);
+
+  // Выводим 0 или 1
+  Serial.println(state);
+
+  delay(100);
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-joystick">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО ДЖОЙСТИКА</div>
+              <div>
+                <span class="badge">Устройство ввода</span>
+                <h2>Джойстик</h2>
+                <p>Позволяет получать положение ручки по двум осям и состояние кнопки.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Джойстик</th><th>Arduino Uno</th></tr>
+              <tr><td>VCC</td><td>5V</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+              <tr><td>VRx</td><td>A0</td></tr>
+              <tr><td>VRy</td><td>A1</td></tr>
+              <tr><td>SW</td><td>D2</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ДЖОЙСТИКА</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Чтение осей джойстика</span><button class="copy">Копировать</button></div>
+<pre><code>void setup() {
+  Serial.begin(9600);
+
+  // Кнопка джойстика
+  pinMode(2, INPUT_PULLUP);
+}
+
+void loop() {
+  // Читаем горизонтальное положение
+  int x = analogRead(A0);
+
+  // Читаем вертикальное положение
+  int y = analogRead(A1);
+
+  // Читаем кнопку
+  int button = digitalRead(2);
+
+  Serial.print("X: ");
+  Serial.print(x);
+
+  Serial.print("  Y: ");
+  Serial.print(y);
+
+  Serial.print("  Button: ");
+  Serial.println(button);
+
+  delay(100);
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-relay">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО РЕЛЕ-МОДУЛЯ</div>
+              <div>
+                <span class="badge">Коммутация нагрузки</span>
+                <h2>Реле-модуль</h2>
+                <p>Позволяет микроконтроллеру включать и выключать внешнюю нагрузку через управляющий сигнал.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Реле</th><th>Arduino Uno</th></tr>
+              <tr><td>VCC</td><td>5V</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+              <tr><td>IN</td><td>D7</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ РЕЛЕ-МОДУЛЯ</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Включение реле</span><button class="copy">Копировать</button></div>
+<pre><code>const int RELAY = 7;
+
+void setup() {
+  // Управляющий вход реле
+  pinMode(RELAY, OUTPUT);
+}
+
+void loop() {
+  // Включаем реле
+  digitalWrite(RELAY, HIGH);
+  delay(1000);
+
+  // Выключаем реле
+  digitalWrite(RELAY, LOW);
+  delay(1000);
+}</code></pre>
+            </div>
+
+            <div class="tip warn">Некоторые реле-модули работают с обратной логикой: LOW может означать включение. Проверяйте конкретный модуль.</div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-motor">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО DC-МОТОРА И ДРАЙВЕРА</div>
+              <div>
+                <span class="badge">Движение</span>
+                <h2>DC-мотор и драйвер</h2>
+                <p>Обычный DC-мотор нельзя подключать напрямую к цифровому пину Arduino. Для него нужен драйвер двигателя.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Драйвер</th><th>Arduino Uno</th></tr>
+              <tr><td>IN1</td><td>D7</td></tr>
+              <tr><td>IN2</td><td>D8</td></tr>
+              <tr><td>ENA / PWM</td><td>D9</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ DC-МОТОРА ЧЕРЕЗ ДРАЙВЕР</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Управление направлением и скоростью</span><button class="copy">Копировать</button></div>
+<pre><code>const int IN1 = 7;
+const int IN2 = 8;
+const int SPEED = 9;
+
+void setup() {
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(SPEED, OUTPUT);
+}
+
+void loop() {
+  // Направление вперёд
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+
+  // Скорость примерно 60%
+  analogWrite(SPEED, 150);
+  delay(2000);
+
+  // Остановка
+  analogWrite(SPEED, 0);
+  delay(1000);
+
+  // Направление назад
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+
+  analogWrite(SPEED, 150);
+  delay(2000);
+
+  // Снова остановка
+  analogWrite(SPEED, 0);
+  delay(1000);
+}</code></pre>
+            </div>
+
+            <div class="tip warn">
+              Питание мотора обычно подают отдельно. Земля Arduino и драйвера должна быть общей.
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-servo">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО SERVO SG90</div>
+              <div>
+                <span class="badge">Исполнительное устройство</span>
+                <h2>Servo SG90</h2>
+                <p>Поворачивает вал на заданный угол.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Провод</th><th>Arduino</th></tr>
+              <tr><td>Коричневый</td><td>GND</td></tr>
+              <tr><td>Красный</td><td>5V</td></tr>
+              <tr><td>Оранжевый</td><td>D9</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ SERVO SG90</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Поворот сервопривода</span><button class="copy">Копировать</button></div>
+<pre><code>// Подключаем библиотеку для сервопривода
+#include &lt;Servo.h&gt;
+
+// Создаём объект сервопривода
+Servo motor;
+
+void setup() {
+  // Сигнальный провод подключён к D9
+  motor.attach(9);
+}
+
+void loop() {
+  // Поворачиваем примерно на 0 градусов
+  motor.write(0);
+  delay(1000);
+
+  // Поворачиваем примерно на 90 градусов
+  motor.write(90);
+  delay(1000);
+
+  // Поворачиваем примерно на 180 градусов
+  motor.write(180);
+  delay(1000);
+}</code></pre>
+            </div>
+
+            <div class="explain">
+              <div class="explain-row"><code>#include &lt;Servo.h&gt;</code><div>Подключаем библиотеку сервопривода.</div></div>
+              <div class="explain-row"><code>motor.attach(9)</code><div>Указываем пин D9 для сигнального провода.</div></div>
+              <div class="explain-row"><code>motor.write(90)</code><div>Поворачиваем сервопривод примерно на 90 градусов.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-detail" id="sensor-buzzer">
+          <div class="panel">
+            <div class="sensor-head">
+              <div class="photo-placeholder photo-small">ФОТО ЗУММЕРА</div>
+              <div>
+                <span class="badge">Звуковое устройство</span>
+                <h2>Зуммер</h2>
+                <p>Используется для подачи звуковых сигналов.</p>
+              </div>
+            </div>
+
+            <table class="connection-table">
+              <tr><th>Зуммер</th><th>Arduino</th></tr>
+              <tr><td>+</td><td>D8</td></tr>
+              <tr><td>-</td><td>GND</td></tr>
+            </table>
+
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ЗУММЕРА</div>
+
+            <div class="code-wrap">
+              <div class="code-title"><span>Звуковой сигнал</span><button class="copy">Копировать</button></div>
+<pre><code>// Зуммер подключён к D8
+const int BUZZER = 8;
+
+void setup() {
+}
+
+void loop() {
+  // Включаем звук частотой 1000 Гц
+  tone(BUZZER, 1000);
+  delay(500);
+
+  // Выключаем звук
+  noTone(BUZZER);
+  delay(500);
+}</code></pre>
+            </div>
+
+            <div class="explain">
+              <div class="explain-row"><code>tone(BUZZER, 1000)</code><div>Включает звук частотой 1000 Гц.</div></div>
+              <div class="explain-row"><code>noTone(BUZZER)</code><div>Выключает звук.</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="page" id="page-algorithms">
+    <h1>Виды алгоритмических конструкций</h1>
+    <p class="lead">
+      Большинство программ для Arduino строится из трёх основных алгоритмических конструкций:
+      следование, ветвление и цикл.
+    </p>
+
+    <div class="panel">
+      <h2>1. Следование</h2>
+      <p>Команды выполняются одна за другой сверху вниз.</p>
+
+      <div class="code-wrap">
+        <div class="code-title"><span>Пример следования</span><button class="copy">Копировать</button></div>
+<pre><code>void loop() {
+  // Включаем светодиод
+  digitalWrite(8, HIGH);
+
+  // Ждём 1 секунду
+  delay(1000);
+
+  // Выключаем светодиод
+  digitalWrite(8, LOW);
+
+  // Снова ждём 1 секунду
+  delay(1000);
+}</code></pre>
+      </div>
+
+      <div class="tip">
+        Здесь нет выбора. Arduino просто выполняет каждую команду по очереди.
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>2. Ветвление</h2>
+      <p>
+        Ветвление используется, когда программа должна принять решение:
+        если условие выполняется — сделать одно, иначе — другое.
+      </p>
+
+      <div class="code-wrap">
+        <div class="code-title"><span>Пример if / else</span><button class="copy">Копировать</button></div>
+<pre><code>void loop() {
+  // Читаем кнопку
+  int button = digitalRead(2);
+
+  // Проверяем условие
+  if (button == LOW) {
+    // Если кнопка нажата — включаем светодиод
+    digitalWrite(8, HIGH);
+  } else {
+    // Иначе — выключаем
+    digitalWrite(8, LOW);
+  }
+}</code></pre>
+      </div>
+
+      <div class="explain">
+        <div class="explain-row"><code>if (...)</code><div>Проверяет условие.</div></div>
+        <div class="explain-row"><code>else</code><div>Выполняется, если условие в if оказалось ложным.</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>3. Цикл</h2>
+      <p>Цикл позволяет повторять одинаковые действия несколько раз.</p>
+
+      <h3>Цикл for</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Повторить действие 5 раз</span><button class="copy">Копировать</button></div>
+<pre><code>void loop() {
+  // Переменная i принимает значения 0, 1, 2, 3, 4
+  for (int i = 0; i &lt; 5; i++) {
+    // Короткий звуковой сигнал
+    tone(8, 1000);
+    delay(200);
+
+    // Выключаем звук
+    noTone(8);
+    delay(200);
+  }
+
+  // Пауза перед следующим повторением loop()
+  delay(2000);
+}</code></pre>
+      </div>
+
+      <h3 style="margin-top:22px">Цикл while</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Выполнять, пока условие истинно</span><button class="copy">Копировать</button></div>
+<pre><code>void loop() {
+  // Пока кнопка нажата
+  while (digitalRead(2) == LOW) {
+    // Светодиод мигает
+    digitalWrite(8, HIGH);
+    delay(200);
+
+    digitalWrite(8, LOW);
+    delay(200);
+  }
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Как выбрать конструкцию</h2>
+      <table class="connection-table">
+        <tr><th>Конструкция</th><th>Когда использовать</th><th>Пример</th></tr>
+        <tr><td>Следование</td><td>Когда команды должны выполняться одна за другой</td><td>Включить LED → подождать → выключить LED</td></tr>
+        <tr><td>Ветвление</td><td>Когда нужно проверить условие</td><td>Если темно — включить свет</td></tr>
+        <tr><td>Цикл</td><td>Когда действие нужно повторить</td><td>Мигнуть 5 раз</td></tr>
+      </table>
+    </div>
+  </section>
+
+  
+  <section class="page" id="page-lessons">
+    <h1>Уроки</h1>
+    <p class="lead">
+      Здесь каждый урок оформлен как отдельная практическая работа. Идите по порядку:
+      сначала собираем схему, затем загружаем программу и только после этого выполняем самостоятельное задание.
+    </p>
+
+    <div class="lesson-list">
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 1</div>
+          <h2>Первый светодиод</h2>
+          <p>Учимся управлять выходом Arduino.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> заставить светодиод включаться и выключаться раз в секунду.</div>
+
+          <div class="lesson-step">
+            <h4>Что понадобится</h4>
+            <ul><li>Arduino Uno</li><li>светодиод</li><li>резистор 220–330 Ом</li><li>макетная плата и провода</li></ul>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>Элемент</th><th>Куда подключить</th></tr>
+              <tr><td>Длинная ножка LED</td><td>D8 через резистор</td></tr>
+              <tr><td>Короткая ножка LED</td><td>GND</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 1</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Мигание LED</span><button class="copy">Копировать</button></div>
+<pre><code>// Светодиод подключён к D8
+const int LED = 8;
+
+void setup() {
+  // D8 будет управлять светодиодом
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  // Включаем светодиод
+  digitalWrite(LED, HIGH);
+  delay(1000);
+
+  // Выключаем светодиод
+  digitalWrite(LED, LOW);
+  delay(1000);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Что здесь происходит</h4>
+            <p><code>pinMode()</code> настраивает пин, <code>digitalWrite()</code> включает или выключает его, а <code>delay(1000)</code> ждёт одну секунду.</p>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> светодиод мигает раз в секунду.</div>
+          <div class="tip"><b>Самостоятельно:</b> сделайте так, чтобы он мигал быстрее — каждые 200 мс.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 2</div>
+          <h2>Светофор</h2>
+          <p>Учимся управлять несколькими выходами и понимать последовательность команд.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> собрать светофор из трёх светодиодов.</div>
+
+          <div class="lesson-step">
+            <h4>Что понадобится</h4>
+            <ul><li>3 светодиода: красный, жёлтый, зелёный</li><li>3 резистора 220–330 Ом</li><li>Arduino Uno</li></ul>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>Светодиод</th><th>Пин</th></tr>
+              <tr><td>Красный</td><td>D8</td></tr>
+              <tr><td>Жёлтый</td><td>D9</td></tr>
+              <tr><td>Зелёный</td><td>D10</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 2</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Светофор</span><button class="copy">Копировать</button></div>
+<pre><code>const int RED = 8;
+const int YELLOW = 9;
+const int GREEN = 10;
+
+void setup() {
+  pinMode(RED, OUTPUT);
+  pinMode(YELLOW, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+}
+
+void loop() {
+  // Красный
+  digitalWrite(RED, HIGH);
+  delay(3000);
+  digitalWrite(RED, LOW);
+
+  // Жёлтый
+  digitalWrite(YELLOW, HIGH);
+  delay(1000);
+  digitalWrite(YELLOW, LOW);
+
+  // Зелёный
+  digitalWrite(GREEN, HIGH);
+  delay(3000);
+  digitalWrite(GREEN, LOW);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Главная идея</h4>
+            <p>Это пример <b>следования</b>: команды выполняются строго по порядку сверху вниз.</p>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> сигналы светофора переключаются по очереди.</div>
+          <div class="tip"><b>Самостоятельно:</b> добавьте мигание зелёного перед включением жёлтого.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 3</div>
+          <h2>Кнопка управляет светодиодом</h2>
+          <p>Учимся читать входной сигнал и использовать условие if.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> светодиод горит только тогда, когда кнопка нажата.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>Элемент</th><th>Подключение</th></tr>
+              <tr><td>Кнопка</td><td>D2 и GND</td></tr>
+              <tr><td>Светодиод</td><td>D8 через резистор и GND</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 3</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Кнопка и LED</span><button class="copy">Копировать</button></div>
+<pre><code>const int BUTTON = 2;
+const int LED = 8;
+
+void setup() {
+  // Включаем внутренний подтягивающий резистор
+  pinMode(BUTTON, INPUT_PULLUP);
+
+  // Светодиод — выход
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  // При INPUT_PULLUP нажатая кнопка даёт LOW
+  if (digitalRead(BUTTON) == LOW) {
+    digitalWrite(LED, HIGH);
+  } else {
+    digitalWrite(LED, LOW);
+  }
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Главная идея</h4>
+            <p><code>if</code> проверяет условие. Если оно истинно — выполняется первый блок, иначе выполняется <code>else</code>.</p>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> нажали кнопку — LED загорелся, отпустили — погас.</div>
+          <div class="tip"><b>Самостоятельно:</b> сделайте наоборот: при нажатии светодиод должен гаснуть.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 4</div>
+          <h2>Потенциометр и Serial Monitor</h2>
+          <p>Учимся получать число от аналогового датчика.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> видеть на экране компьютера положение ручки потенциометра.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>Потенциометр</th><th>Arduino</th></tr>
+              <tr><td>Крайний вывод</td><td>5V</td></tr>
+              <tr><td>Средний</td><td>A0</td></tr>
+              <tr><td>Второй крайний</td><td>GND</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 4</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Чтение A0</span><button class="copy">Копировать</button></div>
+<pre><code>void setup() {
+  // Запускаем связь с компьютером
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Получаем значение от 0 до 1023
+  int value = analogRead(A0);
+
+  // Показываем его в Serial Monitor
+  Serial.println(value);
+
+  delay(100);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> при вращении ручки число меняется примерно от 0 до 1023.</div>
+          <div class="tip"><b>Самостоятельно:</b> найдите положение ручки, при котором значение около 500.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 5</div>
+          <h2>Автоматический ночник</h2>
+          <p>Используем фоторезистор и условие.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> автоматически включать светодиод в темноте.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <p>Фоторезистор подключается к A0 через делитель напряжения, светодиод — к D8.</p>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 5</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Ночник</span><button class="copy">Копировать</button></div>
+<pre><code>const int LED = 8;
+const int LIGHT = A0;
+
+// Порог нужно подобрать по своему датчику
+const int LIMIT = 500;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Читаем уровень освещённости
+  int value = analogRead(LIGHT);
+  Serial.println(value);
+
+  // Если стало темно
+  if (value &lt; LIMIT) {
+    digitalWrite(LED, HIGH);
+  } else {
+    digitalWrite(LED, LOW);
+  }
+
+  delay(100);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> при затемнении датчика LED включается.</div>
+          <div class="tip"><b>Самостоятельно:</b> измените LIMIT так, чтобы ночник срабатывал именно при нужном освещении.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 6</div>
+          <h2>Сервопривод</h2>
+          <p>Учимся управлять положением механизма.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> поворачивать сервопривод на 0°, 90° и 180°.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>Провод</th><th>Arduino</th></tr>
+              <tr><td>Коричневый</td><td>GND</td></tr>
+              <tr><td>Красный</td><td>5V</td></tr>
+              <tr><td>Оранжевый</td><td>D9</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 6</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Servo SG90</span><button class="copy">Копировать</button></div>
+<pre><code>// Подключаем библиотеку Servo
+#include &lt;Servo.h&gt;
+
+Servo servo;
+
+void setup() {
+  // Сигнальный провод на D9
+  servo.attach(9);
+}
+
+void loop() {
+  servo.write(0);
+  delay(1000);
+
+  servo.write(90);
+  delay(1000);
+
+  servo.write(180);
+  delay(1000);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> вал по очереди переходит в три положения.</div>
+          <div class="tip"><b>Самостоятельно:</b> сделайте положения 30°, 60°, 120° и 150°.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 7</div>
+          <h2>Измерение расстояния HC-SR04</h2>
+          <p>Учимся работать с ультразвуковым датчиком.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> выводить расстояние до объекта в сантиметрах.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>HC-SR04</th><th>Arduino</th></tr>
+              <tr><td>VCC</td><td>5V</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+              <tr><td>TRIG</td><td>D7</td></tr>
+              <tr><td>ECHO</td><td>D6</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 7</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Расстояние в см</span><button class="copy">Копировать</button></div>
+<pre><code>const int TRIG = 7;
+const int ECHO = 6;
+
+void setup() {
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Короткий импульс на TRIG
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+
+  // Измеряем время возвращения сигнала
+  long time = pulseIn(ECHO, HIGH);
+
+  // Переводим время в сантиметры
+  float distance = time * 0.034 / 2;
+
+  Serial.println(distance);
+  delay(200);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> в Serial Monitor отображается расстояние до препятствия.</div>
+          <div class="tip"><b>Самостоятельно:</b> выводите слово «Близко», если расстояние меньше 20 см.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 8</div>
+          <h2>Звуковая сигнализация</h2>
+          <p>Объединяем HC-SR04 и зуммер.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> подавать звуковой сигнал, если объект находится ближе 20 см.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <p>HC-SR04 подключается как в уроке 7. Зуммер: плюс к D8, минус к GND.</p>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 8</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Главная логика</h4>
+<pre><code>// Если объект близко
+if (distance &lt; 20) {
+  tone(8, 1000);
+} else {
+  noTone(8);
+}</code></pre>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> зуммер включается только при приближении объекта.</div>
+          <div class="tip"><b>Самостоятельно:</b> сделайте частый сигнал при расстоянии меньше 10 см и редкий — от 10 до 30 см.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 9</div>
+          <h2>DC-мотор через драйвер</h2>
+          <p>Учимся управлять направлением и скоростью двигателя.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> запустить мотор вперёд, остановить и запустить назад.</div>
+
+          <div class="lesson-step">
+            <h4>Подключение</h4>
+            <table class="connection-table">
+              <tr><th>Драйвер</th><th>Arduino</th></tr>
+              <tr><td>IN1</td><td>D7</td></tr>
+              <tr><td>IN2</td><td>D8</td></tr>
+              <tr><td>ENA/PWM</td><td>D9</td></tr>
+              <tr><td>GND</td><td>GND</td></tr>
+            </table>
+            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 9</div>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Программа</h4>
+            <div class="code-wrap">
+              <div class="code-title"><span>Мотор</span><button class="copy">Копировать</button></div>
+<pre><code>const int IN1 = 7;
+const int IN2 = 8;
+const int SPEED = 9;
+
+void setup() {
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(SPEED, OUTPUT);
+}
+
+void loop() {
+  // Вперёд
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(SPEED, 150);
+  delay(2000);
+
+  // Стоп
+  analogWrite(SPEED, 0);
+  delay(1000);
+
+  // Назад
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(SPEED, 150);
+  delay(2000);
+
+  // Стоп
+  analogWrite(SPEED, 0);
+  delay(1000);
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="lesson-result"><b>Результат:</b> мотор меняет направление вращения.</div>
+          <div class="tip warn"><b>Важно:</b> мотор не подключают напрямую к Arduino. Используйте драйвер и отдельное питание мотора.</div>
+        </div>
+      </div>
+
+      <div class="lesson-card">
+        <div class="lesson-head">
+          <div class="lesson-number">Урок 10</div>
+          <h2>Итоговый робот</h2>
+          <p>Объединяем датчик расстояния и двигатели.</p>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-goal"><b>Цель:</b> робот едет вперёд и меняет направление при появлении препятствия.</div>
+
+          <div class="lesson-step">
+            <h4>Что понадобится</h4>
+            <ul><li>Arduino</li><li>два DC-мотора</li><li>драйвер двигателей</li><li>HC-SR04</li><li>питание</li></ul>
+          </div>
+
+          <div class="lesson-step">
+            <h4>Алгоритм</h4>
+            <ol>
+              <li>Измерить расстояние.</li>
+              <li>Если расстояние больше 20 см — ехать вперёд.</li>
+              <li>Если меньше 20 см — остановиться.</li>
+              <li>Повернуть.</li>
+              <li>Продолжить движение.</li>
+            </ol>
+          </div>
+
+          <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ИТОГОВОГО РОБОТА</div>
+
+          <div class="lesson-result"><b>Результат:</b> готовая основа автономного робота, который реагирует на препятствия.</div>
+          <div class="tip"><b>Самостоятельно:</b> придумайте собственный алгоритм поворота и объезда препятствий.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="page" id="page-projects">
+    <h1>Мини-проекты</h1>
+    <p class="lead">
+      Здесь находятся полностью готовые небольшие проекты: что понадобится, как подключить,
+      какой код загрузить и как работает программа.
+    </p>
+
+    <div class="mini-project">
+      <h2>1. Мигающий светодиод</h2>
+      <p><b>Что понадобится:</b> Arduino, LED, резистор 220–330 Ом.</p>
+
+      <h3>Подключение</h3>
+      <table class="connection-table">
+        <tr><th>Элемент</th><th>Arduino</th></tr>
+        <tr><td>Длинная ножка LED</td><td>D8 через резистор</td></tr>
+        <tr><td>Короткая ножка LED</td><td>GND</td></tr>
+      </table>
+      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «МИГАЮЩИЙ СВЕТОДИОД»</div>
+
+      <h3>Код</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Мигающий светодиод</span><button class="copy">Копировать</button></div>
+<pre><code>const int LED = 8;
+
+void setup() {
+  // Настраиваем D8 как выход
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  // Включаем LED
+  digitalWrite(LED, HIGH);
+  delay(500);
+
+  // Выключаем LED
+  digitalWrite(LED, LOW);
+  delay(500);
+}</code></pre>
+      </div>
+
+      <h3>Как работает</h3>
+      <div class="explain">
+        <div class="explain-row"><code>pinMode(LED, OUTPUT)</code><div>Настраивает пин для управления светодиодом.</div></div>
+        <div class="explain-row"><code>HIGH</code><div>Включает светодиод.</div></div>
+        <div class="explain-row"><code>LOW</code><div>Выключает светодиод.</div></div>
+        <div class="explain-row"><code>delay(500)</code><div>Ждёт половину секунды.</div></div>
+      </div>
+    </div>
+
+    <div class="mini-project">
+      <h2>2. Автоматический ночник</h2>
+      <p><b>Что понадобится:</b> Arduino, фоторезистор, резистор 10 кОм, LED, резистор 220–330 Ом.</p>
+
+      <h3>Подключение</h3>
+      <table class="connection-table">
+        <tr><th>Элемент</th><th>Arduino</th></tr>
+        <tr><td>Фоторезистор</td><td>между 5V и A0</td></tr>
+        <tr><td>10 кОм</td><td>между A0 и GND</td></tr>
+        <tr><td>LED</td><td>D8 через резистор</td></tr>
+      </table>
+      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «НОЧНИК»</div>
+
+      <h3>Код</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Автоматический ночник</span><button class="copy">Копировать</button></div>
+<pre><code>const int LDR = A0;
+const int LED = 8;
+const int LIMIT = 500;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Читаем освещённость
+  int light = analogRead(LDR);
+
+  // Показываем значение
+  Serial.println(light);
+
+  // Если темно — включаем LED
+  if (light &lt; LIMIT) {
+    digitalWrite(LED, HIGH);
+  } else {
+    digitalWrite(LED, LOW);
+  }
+
+  delay(100);
+}</code></pre>
+      </div>
+
+      <h3>Как работает</h3>
+      <div class="explain">
+        <div class="explain-row"><code>analogRead(LDR)</code><div>Получает значение освещённости.</div></div>
+        <div class="explain-row"><code>LIMIT = 500</code><div>Порог, ниже которого считаем, что стало темно.</div></div>
+        <div class="explain-row"><code>if (light &lt; LIMIT)</code><div>Проверяет, стало ли достаточно темно.</div></div>
+      </div>
+    </div>
+
+    <div class="mini-project">
+      <h2>3. Парктроник</h2>
+      <p><b>Что понадобится:</b> Arduino, HC-SR04, зуммер.</p>
+
+      <h3>Подключение</h3>
+      <table class="connection-table">
+        <tr><th>Элемент</th><th>Arduino</th></tr>
+        <tr><td>HC-SR04 VCC</td><td>5V</td></tr>
+        <tr><td>HC-SR04 GND</td><td>GND</td></tr>
+        <tr><td>TRIG</td><td>D7</td></tr>
+        <tr><td>ECHO</td><td>D6</td></tr>
+        <tr><td>Зуммер +</td><td>D8</td></tr>
+        <tr><td>Зуммер -</td><td>GND</td></tr>
+      </table>
+      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «ПАРКТРОНИК»</div>
+
+      <h3>Код</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Парктроник</span><button class="copy">Копировать</button></div>
+<pre><code>const int TRIG = 7;
+const int ECHO = 6;
+const int BUZZER = 8;
+
+void setup() {
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+}
+
+void loop() {
+  // Отправляем ультразвуковой импульс
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+
+  // Получаем время возврата
+  long time = pulseIn(ECHO, HIGH);
+
+  // Считаем расстояние
+  float distance = time * 0.034 / 2;
+
+  // Если объект ближе 30 см
+  if (distance &lt; 30) {
+    // Чем ближе объект, тем меньше пауза
+    int pauseTime = constrain((int)distance * 10, 80, 500);
+
+    tone(BUZZER, 1000, 70);
+    delay(pauseTime);
+  } else {
+    noTone(BUZZER);
+    delay(100);
+  }
+}</code></pre>
+      </div>
+
+      <h3>Как работает</h3>
+      <div class="explain">
+        <div class="explain-row"><code>pulseIn()</code><div>Измеряет время возврата ультразвука.</div></div>
+        <div class="explain-row"><code>distance &lt; 30</code><div>Проверяет, есть ли объект ближе 30 см.</div></div>
+        <div class="explain-row"><code>pauseTime</code><div>Меняет частоту звуковых сигналов в зависимости от расстояния.</div></div>
+      </div>
+    </div>
+
+    <div class="mini-project">
+      <h2>4. Автоматический шлагбаум</h2>
+      <p><b>Что понадобится:</b> Arduino, HC-SR04, Servo SG90.</p>
+
+      <h3>Подключение</h3>
+      <table class="connection-table">
+        <tr><th>Элемент</th><th>Arduino</th></tr>
+        <tr><td>HC-SR04 TRIG</td><td>D7</td></tr>
+        <tr><td>HC-SR04 ECHO</td><td>D6</td></tr>
+        <tr><td>Servo сигнал</td><td>D9</td></tr>
+        <tr><td>Питание</td><td>5V и GND</td></tr>
+      </table>
+      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «ШЛАГБАУМ»</div>
+
+      <h3>Код</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Автоматический шлагбаум</span><button class="copy">Копировать</button></div>
+<pre><code>#include &lt;Servo.h&gt;
+
+const int TRIG = 7;
+const int ECHO = 6;
+
+Servo barrier;
+
+float getDistance() {
+  // Запускаем измерение
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+
+  // Измеряем время возврата
+  long time = pulseIn(ECHO, HIGH);
+
+  // Возвращаем расстояние
+  return time * 0.034 / 2;
+}
+
+void setup() {
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+
+  // Servo подключён к D9
+  barrier.attach(9);
+
+  // В начале шлагбаум закрыт
+  barrier.write(0);
+}
+
+void loop() {
+  float distance = getDistance();
+
+  // Если машина ближе 15 см
+  if (distance &gt; 0 && distance &lt; 15) {
+    // Поднимаем шлагбаум
+    barrier.write(90);
+
+    // Держим открытым 3 секунды
+    delay(3000);
+
+    // Опускаем
+    barrier.write(0);
+  }
+
+  delay(200);
+}</code></pre>
+      </div>
+
+      <h3>Как работает</h3>
+      <div class="explain">
+        <div class="explain-row"><code>getDistance()</code><div>Отдельная функция измеряет расстояние и возвращает число.</div></div>
+        <div class="explain-row"><code>distance &lt; 15</code><div>Проверяет, приблизился ли объект.</div></div>
+        <div class="explain-row"><code>barrier.write(90)</code><div>Поднимает сервопривод.</div></div>
+        <div class="explain-row"><code>barrier.write(0)</code><div>Опускает шлагбаум обратно.</div></div>
+      </div>
+    </div>
+
+    <div class="mini-project">
+      <h2>5. Сигнализация движения</h2>
+      <p><b>Что понадобится:</b> Arduino, PIR-датчик, зуммер, светодиод.</p>
+
+      <h3>Подключение</h3>
+      <table class="connection-table">
+        <tr><th>Элемент</th><th>Arduino</th></tr>
+        <tr><td>PIR OUT</td><td>D2</td></tr>
+        <tr><td>Зуммер</td><td>D8</td></tr>
+        <tr><td>LED</td><td>D9 через резистор</td></tr>
+      </table>
+      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «СИГНАЛИЗАЦИЯ»</div>
+
+      <h3>Код</h3>
+      <div class="code-wrap">
+        <div class="code-title"><span>Сигнализация</span><button class="copy">Копировать</button></div>
+<pre><code>const int PIR = 2;
+const int BUZZER = 8;
+const int LED = 9;
+
+void setup() {
+  pinMode(PIR, INPUT);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  // Проверяем PIR
+  int motion = digitalRead(PIR);
+
+  if (motion == HIGH) {
+    // Движение обнаружено
+    digitalWrite(LED, HIGH);
+    tone(BUZZER, 1200);
+  } else {
+    // Движения нет
+    digitalWrite(LED, LOW);
+    noTone(BUZZER);
+  }
+
+  delay(100);
+}</code></pre>
+      </div>
+
+      <h3>Как работает</h3>
+      <div class="explain">
+        <div class="explain-row"><code>digitalRead(PIR)</code><div>Читает состояние датчика движения.</div></div>
+        <div class="explain-row"><code>motion == HIGH</code><div>Означает, что датчик заметил движение.</div></div>
+        <div class="explain-row"><code>tone()</code><div>Включает звуковой сигнал.</div></div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="page" id="page-tasks">
+    <h1>Задания для самостоятельного выполнения</h1>
+    <p class="lead">
+      В этом разделе нет готового решения. Нужно самостоятельно выбрать способ подключения
+      и написать программу.
+    </p>
+
+    <div class="task-list">
+      <div class="task">
+        <h3>Задание 1. Кнопка и светодиод</h3>
+        <div class="task-level">Уровень: начальный</div>
+        <p>Сделайте так, чтобы светодиод загорался только при нажатии кнопки.</p>
+        <p><b>Использовать:</b> Arduino, кнопку, светодиод, резистор.</p>
+        <div class="tip"><b>Подсказка:</b> для кнопки можно использовать INPUT_PULLUP.</div>
+      </div>
+
+      <div class="task">
+        <h3>Задание 2. Автоматический свет</h3>
+        <div class="task-level">Уровень: начальный</div>
+        <p>Светодиод должен автоматически включаться, когда становится темно.</p>
+        <p><b>Использовать:</b> фоторезистор, резистор, светодиод.</p>
+        <div class="tip"><b>Подсказка:</b> сначала выведите значение фоторезистора в Serial Monitor и подберите порог.</div>
+      </div>
+
+      <div class="task">
+        <h3>Задание 3. Сигнализация движения</h3>
+        <div class="task-level">Уровень: средний</div>
+        <p>При обнаружении движения должен включаться звуковой сигнал.</p>
+        <p><b>Использовать:</b> PIR и зуммер.</p>
+        <div class="tip"><b>Подсказка:</b> проверьте состояние выхода PIR с помощью digitalRead().</div>
+      </div>
+
+      <div class="task">
+        <h3>Задание 4. Парктроник</h3>
+        <div class="task-level">Уровень: средний</div>
+        <p>Если расстояние до препятствия меньше 20 см, включайте зуммер.</p>
+        <p><b>Использовать:</b> HC-SR04 и зуммер.</p>
+        <div class="tip"><b>Подсказка:</b> после вычисления расстояния используйте условие if.</div>
+      </div>
+
+      <div class="task">
+        <h3>Задание 5. Автоматический шлагбаум</h3>
+        <div class="task-level">Уровень: повышенный</div>
+        <p>При появлении объекта ближе 15 см сервопривод должен поднять шлагбаум, а через несколько секунд опустить.</p>
+        <p><b>Использовать:</b> HC-SR04 и Servo SG90.</p>
+        <div class="tip"><b>Подсказка:</b> сначала проверьте работу датчика и сервопривода отдельно.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Учебный справочник по робототехнике</footer>
+</main>
+</div>
+
+<script>
+const pages = {
+  home: 'Главная',
+  software: 'ПО и скачивание',
+  controllers: 'Виды микроконтроллеров',
+  sensors: 'Компоненты и подключение',
+  algorithms: 'Алгоритмические конструкции',
+  lessons: 'Уроки',
+  projects: 'Мини-проекты',
+  tasks: 'Задания'
+};
+
+function openPage(name){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+
+  document.querySelectorAll('.nav-btn[data-page]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.page === name);
+  });
+
+  document.getElementById('breadcrumb').textContent = pages[name];
+  if (window.innerWidth <= 900) {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('menuToggle').textContent = 'Меню';
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.querySelectorAll('[data-page]').forEach(btn => {
+  btn.addEventListener('click', () => openPage(btn.dataset.page));
+});
+
+document.querySelectorAll('.sensor-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sensor-item').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.sensor-detail').forEach(x => x.classList.remove('active'));
+
+    btn.classList.add('active');
+    document.getElementById('sensor-' + btn.dataset.sensor).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const code = btn.closest('.code-wrap').querySelector('code').innerText;
+    await navigator.clipboard.writeText(code);
+    const old = btn.textContent;
+    btn.textContent = 'Скопировано';
+    setTimeout(() => btn.textContent = old, 1200);
+  });
+});
+
+const app = document.querySelector('.app');
+const sidebar = document.getElementById('sidebar');
+const menuToggle = document.getElementById('menuToggle');
+
+menuToggle.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('open');
+    menuToggle.textContent = sidebar.classList.contains('open') ? 'Закрыть меню' : 'Меню';
+  } else {
+    app.classList.toggle('menu-collapsed');
+    menuToggle.textContent = app.classList.contains('menu-collapsed') ? 'Показать меню' : 'Скрыть меню';
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) {
+    sidebar.classList.remove('open');
+    menuToggle.textContent = app.classList.contains('menu-collapsed') ? 'Показать меню' : 'Скрыть меню';
+  } else {
+    app.classList.remove('menu-collapsed');
+    menuToggle.textContent = 'Меню';
+  }
+});
+</script>
+</body>
+</html>
