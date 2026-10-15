@@ -499,6 +499,88 @@ footer{
   .home-grid,.cards,.steps{grid-template-columns:1fr}
   .explain-row{grid-template-columns:1fr}
 }
+
+/* Фотографии и схемы из папки images */
+.image-container{width:100%;min-height:130px;background:#fff;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:10px 0}
+.image-container img{display:block;width:100%;height:auto;max-height:250px;object-fit:contain}
+.scheme-container{min-height:230px;background:#f8fafc;margin-top:14px}
+.scheme-container img{max-height:500px;padding:12px}
+.image-missing{padding:18px;color:#64748b;text-align:center;font-size:13px;overflow-wrap:anywhere}
+.image-missing code{color:#1d4ed8}
+
+/* Обновлённое оформление учебного справочника */
+:root{--blue:#2563eb;--blue2:#eff6ff;--text:#17243b;--muted:#64748b;--line:#e3eaf2;--bg:#f5f7fb;--card:#fff}
+body{font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.5}
+.content{max-width:1450px;padding:30px clamp(20px,3.3vw,52px) 70px}
+.sidebar{padding:22px 16px;border-color:var(--line);box-shadow:3px 0 18px rgba(27,50,95,.025)}
+.logo{color:#173d8e;font-size:22px;letter-spacing:-.5px;margin-bottom:30px}
+.nav-btn{padding:12px 13px;transition:background .15s,color .15s}
+.nav-btn.active{background:#eaf1ff;color:#1d4ed8}
+.page h1{font-size:clamp(25px,2.4vw,34px);letter-spacing:-.8px;line-height:1.2;margin-bottom:10px}
+.page h2{letter-spacing:-.35px}
+.lead{line-height:1.7;margin-bottom:23px}
+.panel,.card,.lesson-card,.mini-project,.task,.sensor-list,.quick-card{border-color:var(--line);border-radius:15px;box-shadow:0 5px 22px rgba(30,53,90,.035)}
+.panel{padding:24px}
+.card{padding:22px;min-width:0}
+.card h3{font-size:20px}
+.card p,.card li{line-height:1.6}
+.cards{gap:20px;align-items:start}
+.badge{background:#edf3ff;color:#315ac0;line-height:1.4}
+.tip{line-height:1.55}
+.connection-table{overflow-wrap:anywhere;font-size:14px;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.connection-table th,.connection-table td{border:0;border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:11px 13px}
+.connection-table tr:last-child td{border-bottom:0}
+.connection-table tr>*:last-child{border-right:0}
+.connection-table th{color:#30415c;background:#f4f7fb}
+.sensor-layout{grid-template-columns:245px minmax(0,1fr);align-items:start;gap:20px}
+.sensor-list{top:16px;max-height:calc(100vh - 32px);overflow-y:auto;padding:12px}
+.sensor-item{padding:10px 12px}
+.sensor-item.active{background:#e9f1ff}
+.sensor-head{grid-template-columns:190px minmax(0,1fr);align-items:center;gap:22px;margin-bottom:18px}
+.sensor-head h2{font-size:26px;margin:1px 0 4px}
+.sensor-detail>.panel{padding:24px}
+.sensor-detail h3{margin:24px 0 8px}
+.image-container{margin:12px 0;border:1px solid #e5ecf5;border-radius:13px;box-shadow:none;background:#f8fbff;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:0;padding:0}
+.image-container img{display:block;width:100%;height:100%;object-fit:contain;max-height:none;padding:12px;cursor:zoom-in}
+/* Фото плат в карточках: одна высота и без пустых полос */
+.cards .photo-container{height:205px;background:linear-gradient(135deg,#f5f8ff,#fff);margin:12px 0 14px}
+.cards .photo-container img{max-width:100%;object-fit:contain;padding:12px 24px}
+/* Маленькие фото компонентов: аккуратно рядом с описанием */
+.sensor-head .photo-container{height:150px;margin:0;background:linear-gradient(145deg,#f1f6ff,#fff)}
+.sensor-head .photo-container img{padding:12px}
+/* Фото программного обеспечения */
+.download-card .photo-container{height:138px;margin:0}
+.download-card .photo-container img{padding:12px}
+/* Электрические схемы: не огромные блоки, но хорошо читаемые при увеличении */
+.scheme-container{height:auto;min-height:0;max-width:780px;margin:16px auto 22px;background:#f7f9fd}
+.scheme-container img{width:100%;height:auto;max-height:375px;object-fit:contain;padding:14px}
+/* Более удобные иллюстрации внутри занятий */
+.lesson-card .scheme-container,.mini-project .scheme-container{max-width:740px}
+.image-missing{padding:22px;text-align:center;color:#78879e;font-size:13px}
+.image-missing code{color:#4462a3}
+.code-wrap{margin-top:18px}
+pre{font-size:13.5px;line-height:1.65}
+.quick-card{padding:20px;transition:transform .15s,box-shadow .15s,border-color .15s}
+.quick-card:hover{transform:translateY(-2px);box-shadow:0 9px 26px rgba(30,53,90,.09)}
+.home-grid{gap:14px}
+.hero-panel{display:grid;grid-template-columns:1.1fr .9fr;min-height:270px;border-radius:18px;overflow:hidden;background:linear-gradient(110deg,#163e9e,#285fd0);margin:0 0 22px;color:#fff;box-shadow:0 10px 30px rgba(37,99,235,.16)}
+.hero-copy{padding:32px clamp(24px,3vw,40px);align-self:center}
+.hero-eyebrow{display:inline-block;font-size:12px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;color:#c6dbff;margin-bottom:12px}
+.hero-copy h2{color:#fff;font-size:clamp(22px,2.4vw,31px);line-height:1.19;max-width:570px;margin:0 0 13px}
+.hero-copy p{color:#e0ecff;max-width:550px;font-size:14px;line-height:1.65;margin:0 0 20px}
+.hero-link{background:white;color:#1745aa;border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer}
+.hero-link:hover{background:#eaf2ff}
+.hero-visual{background:linear-gradient(145deg,#f8fbff,#e8f0ff);display:flex;align-items:center;justify-content:center;min-width:0;padding:20px}
+.hero-visual img{width:100%;height:245px;object-fit:contain;display:block;filter:drop-shadow(0 8px 14px rgba(15,41,80,.12));cursor:zoom-in}
+.hero-empty{color:#335797;font-weight:700;text-align:center}
+.image-lightbox{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(10,20,40,.89);padding:42px;cursor:zoom-out}
+.image-lightbox.show{display:flex}
+.image-lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+.image-lightbox button{position:absolute;right:15px;top:13px;width:40px;height:40px;background:#fff;border:0;border-radius:50%;font-size:24px;cursor:pointer}
+@media(max-width:1100px){.sensor-layout{grid-template-columns:210px minmax(0,1fr)}.sensor-head{grid-template-columns:160px minmax(0,1fr)}}
+@media(max-width:900px){.content{padding:18px}.hero-panel{grid-template-columns:1fr}.hero-visual{min-height:200px}.hero-visual img{height:210px}.sensor-layout,.sensor-head{grid-template-columns:1fr}.sensor-head .photo-container{max-width:260px}.sensor-list{max-height:none;position:static}.cards{grid-template-columns:1fr}.download-card{grid-template-columns:1fr}.download-card .photo-container{max-width:320px}}
+@media(max-width:520px){.hero-copy{padding:24px}.panel,.card,.sensor-detail>.panel{padding:17px}.scheme-container img{max-height:300px}.page h1{font-size:26px}}
+
 </style>
 </head>
 <body>
@@ -518,7 +600,7 @@ footer{
   <button class="nav-btn" data-page="tasks">Задания</button>
 
   <div class="sidebar-note">
-    Все фотографии и схемы можно добавить позже. Для них оставлены отдельные места.
+    Фотографии и схемы загружаются из папки images. Нажмите на схему, чтобы увеличить её.
   </div>
 </aside>
 
@@ -534,10 +616,16 @@ footer{
       Учебный справочник по робототехнике. Каждый раздел открывается отдельно через меню слева.
     </p>
 
-    <div class="panel">
-      <div class="photo-placeholder">
-        МЕСТО ДЛЯ ГЛАВНОГО ФОТО<br>
-        Например: Arduino, набор для робототехники или учебный робот
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">Практическая робототехника</span>
+        <h2>От первого светодиода до собственного робота</h2>
+        <p>Изучай компоненты, собирай схемы, программируй Arduino и проверяй результат на практике.</p>
+        <button class="hero-link" type="button" data-page="lessons">Перейти к урокам →</button>
+      </div>
+      <div class="hero-visual">
+        <img src="images/home.png" alt="Набор для робототехники Arduino" loading="eager" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <div class="hero-empty" hidden>Arduino · Электроника · Робототехника</div>
       </div>
     </div>
 
@@ -587,7 +675,7 @@ footer{
     <p class="lead">Что нужно установить перед первым занятием.</p>
 
     <div class="panel download-card">
-      <div class="photo-placeholder photo-small">ФОТО ARDUINO IDE</div>
+      <div class="image-container photo-container"><img src="images/arduino-ide.png" alt="ФОТО ARDUINO IDE" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/arduino-ide.png</code></div></div>
       <div>
         <h2>Arduino IDE</h2>
         <p>Программа для написания и загрузки скетчей в Arduino.</p>
@@ -596,7 +684,7 @@ footer{
     </div>
 
     <div class="panel download-card">
-      <div class="photo-placeholder photo-small">ФОТО WOKWI</div>
+      <div class="image-container photo-container"><img src="images/wokwi.png" alt="ФОТО WOKWI" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/wokwi.png</code></div></div>
       <div>
         <h2>Сайт для симуляции схем</h2>
         <p>
@@ -617,13 +705,13 @@ footer{
         <li>Откройте или напишите программу.</li>
         <li>Нажмите Upload.</li>
       </ol>
-      <div class="photo-placeholder">ФОТО: ВЫБОР ПЛАТЫ И COM-ПОРТА</div>
+      <div class="image-container photo-container"><img src="images/arduino-ide-com-port.png" alt="ФОТО: ВЫБОР ПЛАТЫ И COM-ПОРТА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/arduino-ide-com-port.png</code></div></div>
     </div>
 
     <div class="panel">
       <h2>Драйвер CH340</h2>
       <p>Некоторые совместимые платы Arduino используют USB-чип CH340. Если плата не определяется, может понадобиться отдельный драйвер.</p>
-      <div class="photo-placeholder photo-small">ФОТО ПЛАТЫ С CH340</div>
+      <div class="image-container photo-container"><img src="images/ch340.png" alt="ФОТО ПЛАТЫ С CH340" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/ch340.png</code></div></div>
     </div>
   </section>
 
@@ -638,7 +726,7 @@ footer{
       <div class="card">
         <span class="badge">Лучший вариант для начала</span>
         <h3>Arduino Uno</h3>
-        <div class="photo-placeholder photo-small">ФОТО ARDUINO UNO</div>
+        <div class="image-container photo-container"><img src="images/arduino-uno.png" alt="ФОТО ARDUINO UNO" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/arduino-uno.png</code></div></div>
         <p>
           Удобная учебная плата: крупная, понятная маркировка контактов и огромное количество
           учебных примеров.
@@ -669,7 +757,7 @@ footer{
       <div class="card">
         <span class="badge">Когда устройство должно быть маленьким</span>
         <h3>Arduino Nano</h3>
-        <div class="photo-placeholder photo-small">ФОТО ARDUINO NANO</div>
+        <div class="image-container photo-container"><img src="images/arduino-nano.png" alt="ФОТО ARDUINO NANO" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/arduino-nano.png</code></div></div>
         <p>
           Компактная плата. Классическая Arduino Nano по возможностям близка к Uno,
           но занимает значительно меньше места.
@@ -705,7 +793,7 @@ footer{
       <div class="card">
         <span class="badge">Для большого количества устройств</span>
         <h3>Arduino Mega 2560</h3>
-        <div class="photo-placeholder photo-small">ФОТО ARDUINO MEGA</div>
+        <div class="image-container photo-container"><img src="images/arduino-mega.png" alt="ФОТО ARDUINO MEGA" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/arduino-mega.png</code></div></div>
         <p>
           Большая плата с намного большим количеством входов и выходов, чем Uno.
         </p>
@@ -735,7 +823,7 @@ footer{
       <div class="card">
         <span class="badge">Для беспроводных и более сложных проектов</span>
         <h3>ESP32</h3>
-        <div class="photo-placeholder photo-small">ФОТО ESP32</div>
+        <div class="image-container photo-container"><img src="images/esp32.png" alt="ФОТО ESP32" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/esp32.png</code></div></div>
         <p>
           Семейство более мощных микроконтроллеров со встроенной беспроводной связью.
           Часто используется в устройствах, которые должны обмениваться данными по сети.
@@ -869,7 +957,7 @@ footer{
         <div class="sensor-detail" id="sensor-hcsr04">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО HC-SR04</div>
+              <div class="image-container photo-container"><img src="images/hc-sr04.png" alt="ФОТО HC-SR04" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/hc-sr04.png</code></div></div>
               <div>
                 <span class="badge">Датчик расстояния</span>
                 <h2>HC-SR04</h2>
@@ -886,7 +974,7 @@ footer{
               <tr><td>ECHO</td><td>D6</td><td>Приём ответа</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ HC-SR04</div>
+            <div class="image-container scheme-container"><img src="images/hc-sr04-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ HC-SR04" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/hc-sr04-scheme.png</code></div></div>
 
             <h3>Мини-программа</h3>
             <div class="code-wrap">
@@ -943,7 +1031,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-pir">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО PIR ДАТЧИКА</div>
+              <div class="image-container photo-container"><img src="images/pir.png" alt="ФОТО PIR ДАТЧИКА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/pir.png</code></div></div>
               <div>
                 <span class="badge">Датчик движения</span>
                 <h2>PIR</h2>
@@ -958,7 +1046,7 @@ void loop() {
               <tr><td>OUT</td><td>D2</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ PIR</div>
+            <div class="image-container scheme-container"><img src="images/pir-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ PIR" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/pir-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Определение движения</span><button class="copy">Копировать</button></div>
@@ -998,7 +1086,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-ldr">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО ФОТОРЕЗИСТОРА</div>
+              <div class="image-container photo-container"><img src="images/ldr.png" alt="ФОТО ФОТОРЕЗИСТОРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/ldr.png</code></div></div>
               <div>
                 <span class="badge">Освещённость</span>
                 <h2>Фоторезистор</h2>
@@ -1012,7 +1100,7 @@ void loop() {
               <tr><td>Резистор 10 кОм</td><td>между A0 и GND</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ФОТОРЕЗИСТОРА</div>
+            <div class="image-container scheme-container"><img src="images/ldr-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ФОТОРЕЗИСТОРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/ldr-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Чтение освещённости</span><button class="copy">Копировать</button></div>
@@ -1043,7 +1131,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-pot">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО ПОТЕНЦИОМЕТРА</div>
+              <div class="image-container photo-container"><img src="images/potentiometer.png" alt="ФОТО ПОТЕНЦИОМЕТРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/potentiometer.png</code></div></div>
               <div>
                 <span class="badge">Аналоговый ввод</span>
                 <h2>Потенциометр</h2>
@@ -1058,7 +1146,7 @@ void loop() {
               <tr><td>Второй крайний вывод</td><td>GND</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ПОТЕНЦИОМЕТРА</div>
+            <div class="image-container scheme-container"><img src="images/potentiometer-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ПОТЕНЦИОМЕТРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/potentiometer-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Чтение положения ручки</span><button class="copy">Копировать</button></div>
@@ -1093,7 +1181,7 @@ void loop() {
         <div class="sensor-detail active" id="sensor-button">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО КНОПКИ</div>
+              <div class="image-container photo-container"><img src="images/button.png" alt="ФОТО КНОПКИ" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/button.png</code></div></div>
               <div>
                 <span class="badge">Цифровой вход</span>
                 <h2>Кнопка</h2>
@@ -1107,7 +1195,7 @@ void loop() {
               <tr><td>Контакт 2</td><td>GND</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ КНОПКИ</div>
+            <div class="image-container scheme-container"><img src="images/button-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ КНОПКИ" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/button-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Проверка кнопки</span><button class="copy">Копировать</button></div>
@@ -1145,7 +1233,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-led">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО СВЕТОДИОДА</div>
+              <div class="image-container photo-container"><img src="images/led.png" alt="ФОТО СВЕТОДИОДА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/led.png</code></div></div>
               <div>
                 <span class="badge">Исполнительное устройство</span>
                 <h2>Светодиод</h2>
@@ -1159,7 +1247,7 @@ void loop() {
               <tr><td>Короткая ножка (катод)</td><td>GND</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ СВЕТОДИОДА</div>
+            <div class="image-container scheme-container"><img src="images/led-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ СВЕТОДИОДА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/led-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Мигание светодиода</span><button class="copy">Копировать</button></div>
@@ -1195,7 +1283,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-rgb">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО RGB-СВЕТОДИОДА</div>
+              <div class="image-container photo-container"><img src="images/rgb-led.png" alt="ФОТО RGB-СВЕТОДИОДА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/rgb-led.png</code></div></div>
               <div>
                 <span class="badge">Цветовая индикация</span>
                 <h2>RGB-светодиод</h2>
@@ -1211,7 +1299,7 @@ void loop() {
               <tr><td>Общий вывод</td><td>GND для RGB с общим катодом</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ RGB-СВЕТОДИОДА</div>
+            <div class="image-container scheme-container"><img src="images/rgb-led-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ RGB-СВЕТОДИОДА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/rgb-led-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Изменение цвета</span><button class="copy">Копировать</button></div>
@@ -1252,7 +1340,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-dht11">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО DHT11</div>
+              <div class="image-container photo-container"><img src="images/dht11.png" alt="ФОТО DHT11" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/dht11.png</code></div></div>
               <div>
                 <span class="badge">Температура и влажность</span>
                 <h2>DHT11</h2>
@@ -1267,7 +1355,7 @@ void loop() {
               <tr><td>DATA</td><td>D2</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ DHT11</div>
+            <div class="image-container scheme-container"><img src="images/dht11-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ DHT11" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/dht11-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Температура и влажность</span><button class="copy">Копировать</button></div>
@@ -1312,7 +1400,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-line">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО ДАТЧИКА ЛИНИИ</div>
+              <div class="image-container photo-container"><img src="images/line-sensor.png" alt="ФОТО ДАТЧИКА ЛИНИИ" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/line-sensor.png</code></div></div>
               <div>
                 <span class="badge">Оптический датчик</span>
                 <h2>Датчик линии</h2>
@@ -1327,7 +1415,7 @@ void loop() {
               <tr><td>OUT</td><td>D2</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ДАТЧИКА ЛИНИИ</div>
+            <div class="image-container scheme-container"><img src="images/line-sensor-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ДАТЧИКА ЛИНИИ" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/line-sensor-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Чтение датчика линии</span><button class="copy">Копировать</button></div>
@@ -1356,7 +1444,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-joystick">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО ДЖОЙСТИКА</div>
+              <div class="image-container photo-container"><img src="images/joystick.png" alt="ФОТО ДЖОЙСТИКА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/joystick.png</code></div></div>
               <div>
                 <span class="badge">Устройство ввода</span>
                 <h2>Джойстик</h2>
@@ -1373,7 +1461,7 @@ void loop() {
               <tr><td>SW</td><td>D2</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ДЖОЙСТИКА</div>
+            <div class="image-container scheme-container"><img src="images/joystick-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ДЖОЙСТИКА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/joystick-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Чтение осей джойстика</span><button class="copy">Копировать</button></div>
@@ -1412,7 +1500,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-relay">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО РЕЛЕ-МОДУЛЯ</div>
+              <div class="image-container photo-container"><img src="images/relay.png" alt="ФОТО РЕЛЕ-МОДУЛЯ" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/relay.png</code></div></div>
               <div>
                 <span class="badge">Коммутация нагрузки</span>
                 <h2>Реле-модуль</h2>
@@ -1427,7 +1515,7 @@ void loop() {
               <tr><td>IN</td><td>D7</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ РЕЛЕ-МОДУЛЯ</div>
+            <div class="image-container scheme-container"><img src="images/relay-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ РЕЛЕ-МОДУЛЯ" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/relay-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Включение реле</span><button class="copy">Копировать</button></div>
@@ -1456,7 +1544,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-motor">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО DC-МОТОРА И ДРАЙВЕРА</div>
+              <div class="image-container photo-container"><img src="images/dc-motor.png" alt="ФОТО DC-МОТОРА И ДРАЙВЕРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/dc-motor.png</code></div></div>
               <div>
                 <span class="badge">Движение</span>
                 <h2>DC-мотор и драйвер</h2>
@@ -1472,7 +1560,7 @@ void loop() {
               <tr><td>GND</td><td>GND</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ DC-МОТОРА ЧЕРЕЗ ДРАЙВЕР</div>
+            <div class="image-container scheme-container"><img src="images/dc-motor-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ DC-МОТОРА ЧЕРЕЗ ДРАЙВЕР" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/dc-motor-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Управление направлением и скоростью</span><button class="copy">Копировать</button></div>
@@ -1521,7 +1609,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-servo">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО SERVO SG90</div>
+              <div class="image-container photo-container"><img src="images/servo-sg90.png" alt="ФОТО SERVO SG90" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/servo-sg90.png</code></div></div>
               <div>
                 <span class="badge">Исполнительное устройство</span>
                 <h2>Servo SG90</h2>
@@ -1536,7 +1624,7 @@ void loop() {
               <tr><td>Оранжевый</td><td>D9</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ SERVO SG90</div>
+            <div class="image-container scheme-container"><img src="images/servo-sg90-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ SERVO SG90" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/servo-sg90-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Поворот сервопривода</span><button class="copy">Копировать</button></div>
@@ -1577,7 +1665,7 @@ void loop() {
         <div class="sensor-detail" id="sensor-buzzer">
           <div class="panel">
             <div class="sensor-head">
-              <div class="photo-placeholder photo-small">ФОТО ЗУММЕРА</div>
+              <div class="image-container photo-container"><img src="images/buzzer.png" alt="ФОТО ЗУММЕРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/buzzer.png</code></div></div>
               <div>
                 <span class="badge">Звуковое устройство</span>
                 <h2>Зуммер</h2>
@@ -1591,7 +1679,7 @@ void loop() {
               <tr><td>-</td><td>GND</td></tr>
             </table>
 
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ЗУММЕРА</div>
+            <div class="image-container scheme-container"><img src="images/buzzer-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПОДКЛЮЧЕНИЯ ЗУММЕРА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/buzzer-scheme.png</code></div></div>
 
             <div class="code-wrap">
               <div class="code-title"><span>Звуковой сигнал</span><button class="copy">Копировать</button></div>
@@ -1770,7 +1858,7 @@ void loop() {
               <tr><td>Длинная ножка LED</td><td>D8 через резистор</td></tr>
               <tr><td>Короткая ножка LED</td><td>GND</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 1</div>
+            <div class="image-container scheme-container"><img src="images/lesson-1-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 1" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-1-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -1829,7 +1917,7 @@ void loop() {
               <tr><td>Жёлтый</td><td>D9</td></tr>
               <tr><td>Зелёный</td><td>D10</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 2</div>
+            <div class="image-container scheme-container"><img src="images/lesson-2-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 2" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-2-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -1891,7 +1979,7 @@ void loop() {
               <tr><td>Кнопка</td><td>D2 и GND</td></tr>
               <tr><td>Светодиод</td><td>D8 через резистор и GND</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 3</div>
+            <div class="image-container scheme-container"><img src="images/lesson-3-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 3" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-3-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -1947,7 +2035,7 @@ void loop() {
               <tr><td>Средний</td><td>A0</td></tr>
               <tr><td>Второй крайний</td><td>GND</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 4</div>
+            <div class="image-container scheme-container"><img src="images/lesson-4-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 4" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-4-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -1988,7 +2076,7 @@ void loop() {
           <div class="lesson-step">
             <h4>Подключение</h4>
             <p>Фоторезистор подключается к A0 через делитель напряжения, светодиод — к D8.</p>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 5</div>
+            <div class="image-container scheme-container"><img src="images/lesson-5-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 5" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-5-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -2045,7 +2133,7 @@ void loop() {
               <tr><td>Красный</td><td>5V</td></tr>
               <tr><td>Оранжевый</td><td>D9</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 6</div>
+            <div class="image-container scheme-container"><img src="images/lesson-6-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 6" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-6-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -2098,7 +2186,7 @@ void loop() {
               <tr><td>TRIG</td><td>D7</td></tr>
               <tr><td>ECHO</td><td>D6</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 7</div>
+            <div class="image-container scheme-container"><img src="images/lesson-7-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 7" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-7-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -2152,7 +2240,7 @@ void loop() {
           <div class="lesson-step">
             <h4>Подключение</h4>
             <p>HC-SR04 подключается как в уроке 7. Зуммер: плюс к D8, минус к GND.</p>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 8</div>
+            <div class="image-container scheme-container"><img src="images/lesson-8-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 8" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-8-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -2188,7 +2276,7 @@ if (distance &lt; 20) {
               <tr><td>ENA/PWM</td><td>D9</td></tr>
               <tr><td>GND</td><td>GND</td></tr>
             </table>
-            <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ УРОКА 9</div>
+            <div class="image-container scheme-container"><img src="images/lesson-9-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ УРОКА 9" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-9-scheme.png</code></div></div>
           </div>
 
           <div class="lesson-step">
@@ -2259,7 +2347,7 @@ void loop() {
             </ol>
           </div>
 
-          <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ИТОГОВОГО РОБОТА</div>
+          <div class="image-container scheme-container"><img src="images/lesson-10-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ИТОГОВОГО РОБОТА" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/lesson-10-scheme.png</code></div></div>
 
           <div class="lesson-result"><b>Результат:</b> готовая основа автономного робота, который реагирует на препятствия.</div>
           <div class="tip"><b>Самостоятельно:</b> придумайте собственный алгоритм поворота и объезда препятствий.</div>
@@ -2286,7 +2374,7 @@ void loop() {
         <tr><td>Длинная ножка LED</td><td>D8 через резистор</td></tr>
         <tr><td>Короткая ножка LED</td><td>GND</td></tr>
       </table>
-      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «МИГАЮЩИЙ СВЕТОДИОД»</div>
+      <div class="image-container scheme-container"><img src="images/project-blink-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «МИГАЮЩИЙ СВЕТОДИОД»" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/project-blink-scheme.png</code></div></div>
 
       <h3>Код</h3>
       <div class="code-wrap">
@@ -2329,7 +2417,7 @@ void loop() {
         <tr><td>10 кОм</td><td>между A0 и GND</td></tr>
         <tr><td>LED</td><td>D8 через резистор</td></tr>
       </table>
-      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «НОЧНИК»</div>
+      <div class="image-container scheme-container"><img src="images/project-nightlight-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «НОЧНИК»" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/project-nightlight-scheme.png</code></div></div>
 
       <h3>Код</h3>
       <div class="code-wrap">
@@ -2383,7 +2471,7 @@ void loop() {
         <tr><td>Зуммер +</td><td>D8</td></tr>
         <tr><td>Зуммер -</td><td>GND</td></tr>
       </table>
-      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «ПАРКТРОНИК»</div>
+      <div class="image-container scheme-container"><img src="images/project-parking-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «ПАРКТРОНИК»" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/project-parking-scheme.png</code></div></div>
 
       <h3>Код</h3>
       <div class="code-wrap">
@@ -2446,7 +2534,7 @@ void loop() {
         <tr><td>Servo сигнал</td><td>D9</td></tr>
         <tr><td>Питание</td><td>5V и GND</td></tr>
       </table>
-      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «ШЛАГБАУМ»</div>
+      <div class="image-container scheme-container"><img src="images/project-barrier-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «ШЛАГБАУМ»" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/project-barrier-scheme.png</code></div></div>
 
       <h3>Код</h3>
       <div class="code-wrap">
@@ -2524,7 +2612,7 @@ void loop() {
         <tr><td>Зуммер</td><td>D8</td></tr>
         <tr><td>LED</td><td>D9 через резистор</td></tr>
       </table>
-      <div class="scheme-placeholder">МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «СИГНАЛИЗАЦИЯ»</div>
+      <div class="image-container scheme-container"><img src="images/project-alarm-scheme.png" alt="МЕСТО ДЛЯ СХЕМЫ ПРОЕКТА «СИГНАЛИЗАЦИЯ»" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false"><div class="image-missing" hidden>Изображение не найдено: <code>images/project-alarm-scheme.png</code></div></div>
 
       <h3>Код</h3>
       <div class="code-wrap">
@@ -2695,6 +2783,28 @@ window.addEventListener('resize', () => {
     menuToggle.textContent = 'Меню';
   }
 });
+</script>
+
+<div id="imageLightbox" class="image-lightbox" role="dialog" aria-label="Просмотр изображения" aria-modal="true">
+  <button type="button" aria-label="Закрыть">×</button><img alt="Увеличенное изображение">
+</div>
+<script>
+(() => {
+  const overlay = document.getElementById('imageLightbox');
+  const large = overlay.querySelector('img');
+  function closeImage(){overlay.classList.remove('show');large.removeAttribute('src');document.body.style.overflow='';}
+  document.querySelectorAll('.image-container img,.hero-visual img').forEach(img => {
+    img.addEventListener('click', () => {
+      if (img.hidden || !img.complete || !img.naturalWidth) return;
+      large.src = img.currentSrc || img.src;
+      large.alt = img.alt;
+      overlay.classList.add('show');document.body.style.overflow='hidden';
+    });
+  });
+  overlay.addEventListener('click', closeImage);
+  overlay.querySelector('button').addEventListener('click', closeImage);
+  document.addEventListener('keydown', e => {if(e.key==='Escape')closeImage();});
+})();
 </script>
 </body>
 </html>
